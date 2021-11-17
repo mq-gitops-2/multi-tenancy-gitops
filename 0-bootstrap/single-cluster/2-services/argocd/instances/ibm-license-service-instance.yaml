@@ -34,6 +34,6 @@ spec:
       - name: spec.datasource
         value: datacollector
       - name: spec.httpsEnable
-        value: true
+        value: "true"
       - name: spec.version
         value: 1.10.0
