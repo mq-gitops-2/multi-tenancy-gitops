@@ -22,7 +22,7 @@ spec:
   source:
     chart: ibm-license-service-operator
     repoURL: "https://davemulley.github.io/gitops-testing/" # Populated by kustomize patches in 2-services/kustomization.yaml
-    targetRevision: 0.2.1
+    targetRevision: 0.2.2
     helm:
       parameters:
       - name: metadata.name
