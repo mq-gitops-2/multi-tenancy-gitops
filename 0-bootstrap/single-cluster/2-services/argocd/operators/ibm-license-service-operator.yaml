@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ibm-license-service-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "225"
+  labels:
+    gitops.tier.group: ibm-cloudpak
+    gitops.tier.layer: services
+    gitops.tier.source: helm
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: ibm-common-services
+    server: 'https://kubernetes.default.svc'
+  project: services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    chart: ibm-license-service-operator
+    repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
+    targetRevision: 0.2.1
+    helm:
+      parameters:
+      - name: metadata.name
+        value: ibm-licensing-operator
+      - name: metadata.namespace
+        value: ibm-common-services
+      - name: spec.installPlanApproval
+        value: Automatic
+      - name: spec.name
+        value: ibm-licensing-operator
+      - name: spec.source
+        value: ibm-operator-catalog
+      - name: spec.sourceNamespace
+        value: openshift-marketplace
+      - name: spec.channel
+        value: v3
