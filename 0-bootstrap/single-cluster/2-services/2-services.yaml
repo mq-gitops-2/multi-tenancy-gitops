@@ -68,7 +68,7 @@ spec:
     kind: roles
   - group: "route.openshift.io"
     kind: routes
-  - group: "operators.ibm.com"
+  - group: "operator.ibm.com"
     kind: IBMLicensing
   - group: ""
     kind: RoleBinding
