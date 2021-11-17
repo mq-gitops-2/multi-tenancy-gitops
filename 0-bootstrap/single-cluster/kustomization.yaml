@@ -39,6 +39,9 @@ patches:
   patch: |-
     - op: add
       path: /spec/sourceRepos/-
+      value: https://davemulley.github.io/gitops-testing/
+    - op: add
+      path: /spec/sourceRepos/-
       value: https://github.com/mq-gitops-2/multi-tenancy-gitops.git
     - op: add
       path: /spec/sourceRepos/-
