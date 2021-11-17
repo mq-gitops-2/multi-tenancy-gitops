@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ibm-license-service-isntance
+  name: ibm-license-service-instance
   annotations:
     argocd.argoproj.io/sync-wave: "275"
   labels:
