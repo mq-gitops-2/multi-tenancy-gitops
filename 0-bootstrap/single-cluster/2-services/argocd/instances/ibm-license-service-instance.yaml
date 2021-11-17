@@ -1,36 +1,39 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ibm-platform-navigator-instance
+  name: ibm-license-service-isntance
   annotations:
-    argocd.argoproj.io/sync-wave: "270"
+    argocd.argoproj.io/sync-wave: "275"
   labels:
     gitops.tier.group: ibm-cloudpak
     gitops.tier.layer: services
-    gitops.tier.source: git
+#    gitops.tier.source: helm
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
+  destination:
+    namespace: ibm-common-services
+    server: 'https://kubernetes.default.svc'
+  project: services
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  destination:
-    namespace: tools
-    server: https://kubernetes.default.svc
-  project: services
   source:
-    path: instances/ibm-platform-navigator-instance
+    chart: ibm-license-service-instance
+    repoURL: "https://davemulley.github.io/gitops-testing/" # Populated by kustomize patches in 2-services/kustomization.yaml
+    targetRevision: 0.1.0
     helm:
-      values: |
-        ibm-platform-navigator-instance:
-          ibmplatformnavigator:
-            name: integration-navigator
-            spec:
-              license:
-                accept: true
-                license: L-RJON-BZFQU2
-              mqDashboard: true
-              version: "2021.2.1"
-              replicas: 2
-              storage:
-                class: managed-nfs-storage
-
+      parameters:
+      - name: metadata.name
+        value: ibm-licensing
+      - name: metadata.namespace
+        value: ibm-common-services
+      - name: spec.apiSecretToken
+        value: ibm-licensing-token
+      - name: spec.datasource
+        value: datacollector
+      - name: spec.httpsEnable
+        value: true
+      - name: spec.version
+        value: 1.10.0
