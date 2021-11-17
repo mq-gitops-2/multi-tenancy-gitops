@@ -252,6 +252,12 @@ rules:
   - verbs:
       - '*'
     apiGroups:
+      - operator.ibm.com
+    resources:
+      - ibmlicensings
+  - verbs:
+      - '*'
+    apiGroups:
       - mq.ibm.com
     resources:
       - queuemanagers

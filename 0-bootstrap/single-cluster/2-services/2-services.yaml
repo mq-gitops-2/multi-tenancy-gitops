@@ -68,6 +68,8 @@ spec:
     kind: roles
   - group: "route.openshift.io"
     kind: routes
+  - group: "operators.ibm.com"
+    kind: ibmlicensings
   - group: ""
     kind: RoleBinding
   - group: "rbac.authorization.k8s.io"
