@@ -7,7 +7,7 @@ metadata:
   labels:
     gitops.tier.group: ibm-cloudpak
     gitops.tier.layer: services
-#    gitops.tier.source: helm
+    gitops.tier.source: helm
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -21,7 +21,7 @@ spec:
       selfHeal: true
   source:
     chart: ibm-license-service-instance
-    repoURL: "https://davemulley.github.io/gitops-testing/" # Populated by kustomize patches in 2-services/kustomization.yaml
+    repoURL: "" # Populated by kustomize patches in 2-services/kustomization.yaml
     targetRevision: 0.1.0
     helm:
       parameters:
